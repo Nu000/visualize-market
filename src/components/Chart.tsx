@@ -1,7 +1,6 @@
 // @ts-nocheck
 import React, { useEffect, useState } from 'react';
 import * as d3 from 'd3';
-import { useD3 } from '../util/useD3';
 import { IRate } from '../state/interfaces';
 import './chart.css';
 

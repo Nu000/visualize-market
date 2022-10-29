@@ -10,18 +10,24 @@ import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../state/reduxHooks';
 import { fetchPorts, fetchRates } from '../../state/thunks';
 import { IPort } from '../../state/interfaces';
+import { PortType } from '../../state/types';
 
 interface IProps {
-  name: string,
+  name: PortType,
   ports: IPort[],
-}
-function PortDropDown({ name, ports }: IProps) {
-  const dispatch = useAppDispatch();
-  const [selectedValue, setSelectedValue] = useState('');
+  updatePorts: Function,
+  }
+
+function PortDropDown({ name, ports, updatePorts }: IProps) {
+  const [selectedValue, setSelectedValue] = useState(name === 'origin' ? 'CNSGH' : 'NLRTM');
+
+  useEffect(() => {
+    updatePorts(name, selectedValue);
+  }, [selectedValue]);
 
   return (
     <FormControl fullWidth>
-      <InputLabel id={`${name}-label`}>{name}</InputLabel>
+      <InputLabel id={`${name}-label`}>{name === 'origin' ? 'Origin' : 'Destination'}</InputLabel>
       <Select
         labelId={`${name}-label`}
         id={`${name}-select`}

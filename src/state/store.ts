@@ -1,15 +1,15 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import type { PreloadedState } from '@reduxjs/toolkit';
 
-import applicationsReducer from './applicationSlice';
+import marketRatesReducer from './marketRatesSlice';
 
 export const rootReducer = combineReducers({
-  applications: applicationsReducer,
+  marketRates: marketRatesReducer,
 });
 export type RootState = ReturnType<typeof rootReducer>
 const store = configureStore({
   reducer: {
-    applications: applicationsReducer,
+    marketRates: marketRatesReducer,
   },
 });
 export const setupStore = (preloadedState?: PreloadedState<RootState>) => configureStore({

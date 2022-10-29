@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { IRootState } from './interfaces';
 import { fetchPorts, fetchRates } from './thunks';
 
-const initialState: IRootState = {
+export const initialState: IRootState = {
   ports: [],
   origin: null,
   destination: null,
@@ -28,7 +28,7 @@ export const applicationSlice = createSlice({
     builder.addCase(
       fetchPorts.fulfilled,
       (state, { payload }) => {
-        state.ports.push(...payload);
+        state.ports = payload;
         state.loadingPorts = false;
       },
     );
@@ -46,7 +46,7 @@ export const applicationSlice = createSlice({
     builder.addCase(
       fetchRates.fulfilled,
       (state, { payload }) => {
-        state.rates.push(...payload);
+        state.rates = payload;
         state.loadingRates = false;
       },
     );

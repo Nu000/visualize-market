@@ -32,22 +32,18 @@ export const fetchRates = createAsyncThunk<
 IRate[], {origin: string, dest: string}, { rejectValue:FetchError }>(
   'ports/rates',
   async (ports, { rejectWithValue }) => {
-    const response = await axios.get(`${CONSTANTS.RATES_URL}origin=${ports.origin}&destination=${ports.dest}`, {
-      headers: {
-        'x-api-key': CONSTANTS.API_KEY,
-      },
-    });
-    const { data } = response;
-    if (response.data?.error?.code === 500) {
+    try {
+      const response = await axios.get(`${CONSTANTS.RATES_URL}?origin=${ports.origin}&destination=${ports.dest}`, {
+        headers: {
+          'x-api-key': CONSTANTS.API_KEY,
+        },
+      });
+      const { data } = response;
+      return data;
+    } catch (error) {
       return rejectWithValue({
-        message: 'Failed to load Rates.',
+        message: 'Rates Not Found',
       });
     }
-    if (response.status !== 200) {
-      return rejectWithValue({
-        message: 'Failed to load Rates.',
-      });
-    }
-    return data;
   },
 );

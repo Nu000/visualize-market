@@ -10,8 +10,10 @@ import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../state/reduxHooks';
 import { fetchPorts, fetchRates } from '../../state/thunks';
 import PortDropDown from '../PortDropDown/PortDropDown';
-import { getPorts, getRates } from '../../state/selectors';
+import { getPorts, getRateError, getRates } from '../../state/selectors';
 import Chart from '../Chart';
+import { IPort } from '../../state/interfaces';
+import { FetchError, PortType } from '../../state/types';
 
 function Home() {
   const { t } = useTranslation();
@@ -19,21 +21,34 @@ function Home() {
   const dispatch = useAppDispatch();
   const ports = useAppSelector(getPorts);
   const rates = useAppSelector(getRates);
+  const rateError = useAppSelector(getRateError);
+  const [selectedPorts, setSelectedPorts] = useState({ origin: 'CNSGH', dest: 'NLRTM' });
 
   useEffect(() => {
     dispatch(fetchPorts());
-    dispatch(fetchRates({ origin: 'CNSGH', dest: 'NLRTM' }));
   }, []);
+
+  useEffect(() => {
+    dispatch(fetchRates(selectedPorts));
+  }, [selectedPorts]);
+
+  const updatePorts = (name: PortType, value: string) => {
+    if (selectedPorts[name] !== value) {
+      setSelectedPorts({ ...selectedPorts, [name]: value });
+    }
+  };
 
   return (
     <Container maxWidth="lg">
       <Box sx={{ minWidth: 120, marginTop: '10px' }}>
-        <PortDropDown name="Origin" ports={ports} />
-        <PortDropDown name="Destination" ports={ports} />
+        <PortDropDown name="origin" ports={ports} updatePorts={updatePorts} />
+        <PortDropDown name="dest" ports={ports} updatePorts={updatePorts} />
       </Box>
-      <Box sx={{ minWidth: 120, marginTop: '10px' }}>
-        <Chart rates={rates} />
-      </Box>
+      {rateError !== null ? <p>{rateError}</p> : (
+        <Box sx={{ minWidth: 120, marginTop: '10px' }}>
+          <Chart rates={rates} />
+        </Box>
+      )}
     </Container>
   );
 }
