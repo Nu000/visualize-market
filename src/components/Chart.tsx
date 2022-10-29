@@ -5,14 +5,14 @@ import { IRate } from '../state/interfaces';
 import './chart.css';
 
 interface IProps {
-    rates: IRate[]
+    rates: IRate[],
+    marketPosition: string
 }
-function Chart({ rates } : IProps) {
+function Chart({ rates, marketPosition } : IProps) {
   const [activeIndex, setActiveIndex] = useState(null);
   //   const [dateRange, setDateRange] = useState(
   //     { start: rates[0].day, end: rates[rates.length - 1].day },
   //   );
-  const [marketPosition, setMarketPosition] = useState('mean');
   let { innerWidth: width, innerHeight: height } = window;
 
   const [data, setData] = React.useState([]);
@@ -35,7 +35,7 @@ function Chart({ rates } : IProps) {
       data.push(datapoint);
     });
     setData(data);
-  }, [rates]);
+  }, [rates, marketPosition]);
   const yMinValue = d3.min(data, (d) => d.marketPosition);
   const yMaxValue = d3.max(data, (d) => d.marketPosition);
 
