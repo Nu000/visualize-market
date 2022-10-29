@@ -1,0 +1,23 @@
+body {
+    padding: 80px 40px;
+  }
+  
+  .wrapper {
+    font-size: 16px;
+    color: #666;
+    padding: 25px;
+  }
+  
+  svg {
+    overflow: visible;
+  }
+  
+  text {
+    font-size: 12px;
+  }
+  
+  .axis .domain,
+  .axis.xAxis line {
+    display: none;
+  }
+      

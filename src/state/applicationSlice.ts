@@ -28,7 +28,6 @@ export const applicationSlice = createSlice({
     builder.addCase(
       fetchPorts.fulfilled,
       (state, { payload }) => {
-        console.log(payload);
         state.ports.push(...payload);
         state.loadingPorts = false;
       },
@@ -47,7 +46,6 @@ export const applicationSlice = createSlice({
     builder.addCase(
       fetchRates.fulfilled,
       (state, { payload }) => {
-        console.log(payload);
         state.rates.push(...payload);
         state.loadingRates = false;
       },

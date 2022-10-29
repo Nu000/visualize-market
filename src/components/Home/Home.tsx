@@ -10,14 +10,15 @@ import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../state/reduxHooks';
 import { fetchPorts, fetchRates } from '../../state/thunks';
 import PortDropDown from '../PortDropDown/PortDropDown';
-import { getPorts } from '../../state/selectors';
+import { getPorts, getRates } from '../../state/selectors';
+import Chart from '../Chart';
 
 function Home() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const ports = useAppSelector(getPorts);
-  const [origin, setOrigin] = useState('');
+  const rates = useAppSelector(getRates);
 
   useEffect(() => {
     dispatch(fetchPorts());
@@ -30,7 +31,9 @@ function Home() {
         <PortDropDown name="Origin" ports={ports} />
         <PortDropDown name="Destination" ports={ports} />
       </Box>
-
+      <Box sx={{ minWidth: 120, marginTop: '10px' }}>
+        <Chart rates={rates} />
+      </Box>
     </Container>
   );
 }
