@@ -14,7 +14,7 @@ export const initialState: IRootState = {
 
 };
 
-export const applicationSlice = createSlice({
+export const marketRatesSlice = createSlice({
   name: 'marketRates',
   initialState,
   reducers: {
@@ -55,6 +55,7 @@ export const applicationSlice = createSlice({
       (state, { payload }) => {
         if (payload) state.errorRates = payload.message;
         state.loadingRates = false;
+        state.rates = [];
       },
     );
   },
@@ -62,6 +63,6 @@ export const applicationSlice = createSlice({
 
 // export const {
 
-// } = applicationSlice.actions;
+// } = marketRatesSlice.actions;
 
-export default applicationSlice.reducer;
+export default marketRatesSlice.reducer;
