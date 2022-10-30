@@ -1,6 +1,7 @@
 // @ts-nocheck
 import React, { useEffect, useState } from 'react';
 import * as d3 from 'd3';
+import { Alert } from '@mui/material';
 import { IRate } from '../../state/interfaces';
 import './chart.css';
 
@@ -11,7 +12,7 @@ interface IProps {
 function Chart({ rates, marketPosition } : IProps) {
   const [activeIndex, setActiveIndex] = useState(null);
   let { innerWidth: width, innerHeight: height } = window;
-
+  const [invalidData, setInvalidData] = React.useState(false);
   const [data, setData] = React.useState([]);
   const margin = {
     top: 60, right: 10, bottom: 80, left: 10,
@@ -25,6 +26,10 @@ function Chart({ rates, marketPosition } : IProps) {
     const parseDate = d3.timeParse('%Y-%m-%d');
     const data = [];
     rates.forEach((element) => {
+      if (element.day === null || element.high === null
+        || element.mean === null || element.low === null) {
+        setInvalidData(true);
+      }
       const datapoint = {
         day: parseDate(element.day),
         marketPosition: Number(element[marketPosition]),
@@ -64,41 +69,43 @@ function Chart({ rates, marketPosition } : IProps) {
 
   return (
     <div className="wrapper">
-      <svg
-        viewBox={`0 0 ${width + margin.left + margin.right} 
+      {invalidData ? <Alert severity="error">Invalid Data</Alert> : (
+        <svg
+          viewBox={`0 0 ${width + margin.left + margin.right} 
                           ${height + margin.top + margin.bottom}`}
-        id="chart"
-      >
-        <g className="axis" ref={getYAxis} />
-        <g
-          className="axis xAxis"
-          ref={getXAxis}
-          transform={`translate(0,${height})`}
-        />
-        <path strokeWidth={3} fill="none" stroke={color} d={linePath} />
+          id="chart"
+        >
+          <g className="axis" ref={getYAxis} />
+          <g
+            className="axis xAxis"
+            ref={getXAxis}
+            transform={`translate(0,${height})`}
+          />
+          <path strokeWidth={3} fill="none" stroke={color} d={linePath} />
 
-        {data.map((item, index) => (
-          <g key={item.day}>
-            <text
-              fill="#666"
-              x={getX(item.day)}
-              y={getY(item.marketPosition) - 20}
-              textAnchor="middle"
-            >
-              {index === activeIndex ? item.price : ''}
-            </text>
-            <circle
-              cx={getX(item.day)}
-              cy={getY(item.marketPosition)}
-              r={index === activeIndex ? 6 : 4}
-              fill={color}
-              strokeWidth={index === activeIndex ? 2 : 0}
-              stroke="#fff"
-              style={{ transition: 'ease-out .1s' }}
-            />
-          </g>
-        ))}
-      </svg>
+          {data.map((item, index) => (
+            <g key={item.day}>
+              <text
+                fill="#666"
+                x={getX(item.day)}
+                y={getY(item.marketPosition) - 20}
+                textAnchor="middle"
+              >
+                {index === activeIndex ? item.price : ''}
+              </text>
+              <circle
+                cx={getX(item.day)}
+                cy={getY(item.marketPosition)}
+                r={index === activeIndex ? 6 : 4}
+                fill={color}
+                strokeWidth={index === activeIndex ? 2 : 0}
+                stroke="#fff"
+                style={{ transition: 'ease-out .1s' }}
+              />
+            </g>
+          ))}
+        </svg>
+      )}
     </div>
   );
 }

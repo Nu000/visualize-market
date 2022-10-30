@@ -6,6 +6,7 @@ body {
     font-size: 16px;
     color:lightgray;
     padding: 25px;
+    height: 600px;
   }
   
   svg {

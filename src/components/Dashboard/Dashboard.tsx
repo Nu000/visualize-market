@@ -71,7 +71,9 @@ function Dashboard() {
             />
           </Grid>
           <Grid item xs={10}>
-            {loadingRates ? <CircularProgress />
+            {rateError !== null && <Alert severity="error">{rateError}</Alert>}
+
+            {loadingRates ? <div style={{ height: '600px' }}><CircularProgress /></div>
               : (
                 <Chart rates={rates} marketPosition={marketPosition} />
               )}
