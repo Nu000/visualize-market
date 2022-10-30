@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ErrorPage from './components/ErrorPage/ErrorPage';
-import Home from './components/Home/Home';
+import Home from './components/Dashboard/Dashboard';
 
 function App() {
   return (

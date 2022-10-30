@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import {
   Box, Container, FormLabel, Grid,
 } from '@mui/material';
+import Alert from '@mui/material/Alert';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
@@ -13,7 +14,7 @@ import { getPorts, getRateError, getRates } from '../../state/selectors';
 import Chart from '../Chart/Chart';
 import { PortType } from '../../state/types';
 
-function Home() {
+function Dashboard() {
   const dispatch = useAppDispatch();
   const ports = useAppSelector(getPorts);
   const rates = useAppSelector(getRates);
@@ -26,7 +27,9 @@ function Home() {
   }, []);
 
   useEffect(() => {
-    dispatch(fetchRates(selectedPorts));
+    if (selectedPorts.origin && selectedPorts.dest) {
+      dispatch(fetchRates(selectedPorts));
+    }
   }, [selectedPorts]);
 
   const updatePorts = (name: PortType, value: string) => {
@@ -43,6 +46,9 @@ function Home() {
       justifyContent="center"
       style={{ minHeight: '100vh', maxHeight: '100%' }}
     >
+      <Grid xs={10}>
+        <h1>Market Price</h1>
+      </Grid>
       <Grid xs={5}>
         <PortDropDown name="origin" ports={ports} updatePorts={updatePorts} />
         <PortDropDown name="dest" ports={ports} updatePorts={updatePorts} />
@@ -88,13 +94,14 @@ function Home() {
         </FormGroup>
       </Grid>
       <Grid xs={10}>
-        {rateError !== null ? <div>{rateError}</div> : (
-          <Chart rates={rates} marketPosition={marketPosition} />
-        )}
+        {rateError !== null ? <Alert severity="error">{rateError}</Alert>
+          : (
+            <Chart rates={rates} marketPosition={marketPosition} />
+          )}
       </Grid>
 
     </Grid>
   );
 }
 
-export default Home;
+export default Dashboard;

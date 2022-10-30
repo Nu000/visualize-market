@@ -2,16 +2,16 @@ import React from 'react';
 import { screen, fireEvent } from '@testing-library/react';
 import { setupServer } from 'msw/node';
 import { renderWithProviders } from '../../util/test-utils';
-import Home from './Home';
+import Home from './Dashboard';
 
-describe('Home Tests', () => {
+describe('Dashboard Tests', () => {
   beforeEach(() => {
     renderWithProviders(
       <Home />,
     );
   });
-  test('renders Home Page', () => {
-    const btn = screen.getByText('Home');
+  test('renders Dashboard', () => {
+    const btn = screen.getByText('Market Price');
     expect(btn).toBeInTheDocument();
   });
 });
