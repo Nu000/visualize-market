@@ -4,7 +4,7 @@ body {
   
   .wrapper {
     font-size: 16px;
-    color: #666;
+    color:lightgray;
     padding: 25px;
   }
   
@@ -13,7 +13,8 @@ body {
   }
   
   text {
-    font-size: 12px;
+    font-size: 14px;
+    color: black;
   }
   
   .axis .domain,

@@ -1,5 +1,6 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React, { useEffect, useState } from 'react';
-import { Box, Container } from '@mui/material';
+import { Box, Container, FormLabel } from '@mui/material';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
@@ -34,12 +35,20 @@ function Home() {
 
   return (
     <Container maxWidth="lg">
-      <Box sx={{ minWidth: 120, marginTop: '10px' }}>
+      <Box sx={{
+        minWidth: 120, marginTop: '10px', display: 'flex', p: 1, m: 1,
+      }}
+      >
         <PortDropDown name="origin" ports={ports} updatePorts={updatePorts} />
         <PortDropDown name="dest" ports={ports} updatePorts={updatePorts} />
-      </Box>
-      <Box>
-        <FormGroup>
+        <FormGroup sx={{
+          marginLeft: '15%',
+          flexDirection: 'row-reverse',
+          border: '1px solid lightgray',
+          paddingLeft: 1,
+          borderRadius: '5px',
+        }}
+        >
           <FormControlLabel
             control={(
               <Checkbox
@@ -47,7 +56,7 @@ function Home() {
                 onChange={() => { setMarketPosition('high'); }}
               />
             )}
-            label="High"
+            label="Market High"
           />
           <FormControlLabel
             control={(
@@ -56,7 +65,7 @@ function Home() {
                 onChange={() => { setMarketPosition('mean'); }}
               />
         )}
-            label="Mean"
+            label="Market Average"
           />
           <FormControlLabel
             control={(
@@ -65,7 +74,7 @@ function Home() {
                 onChange={() => { setMarketPosition('low'); }}
               />
 )}
-            label="Low"
+            label="Market Low"
           />
         </FormGroup>
       </Box>

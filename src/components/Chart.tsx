@@ -10,9 +10,6 @@ interface IProps {
 }
 function Chart({ rates, marketPosition } : IProps) {
   const [activeIndex, setActiveIndex] = useState(null);
-  //   const [dateRange, setDateRange] = useState(
-  //     { start: rates[0].day, end: rates[rates.length - 1].day },
-  //   );
   let { innerWidth: width, innerHeight: height } = window;
 
   const [data, setData] = React.useState([]);

@@ -26,7 +26,7 @@ function PortDropDown({ name, ports, updatePorts }: IProps) {
   }, [selectedValue]);
 
   return (
-    <FormControl fullWidth>
+    <FormControl sx={{ width: '20%', m: 1 }}>
       <InputLabel id={`${name}-label`}>{name === 'origin' ? 'Origin' : 'Destination'}</InputLabel>
       <Select
         labelId={`${name}-label`}
@@ -35,7 +35,7 @@ function PortDropDown({ name, ports, updatePorts }: IProps) {
         label={name}
         onChange={(e: SelectChangeEvent) => { setSelectedValue(e.target.value as string); }}
       >
-        {ports.map((port) => <MenuItem key={port.code} value={port.code}>{port.name}</MenuItem>)}
+        {ports.map((port) => <MenuItem key={port.code} value={port.code}>{`${port.name}(${port.code})`}</MenuItem>)}
       </Select>
     </FormControl>
   );
