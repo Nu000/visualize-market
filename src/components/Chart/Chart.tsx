@@ -1,7 +1,7 @@
 // @ts-nocheck
 import React, { useEffect, useState } from 'react';
 import * as d3 from 'd3';
-import { IRate } from '../state/interfaces';
+import { IRate } from '../../state/interfaces';
 import './chart.css';
 
 interface IProps {
@@ -69,24 +69,11 @@ function Chart({ rates, marketPosition } : IProps) {
     .y1(() => getY(yMinValue - 1))
     .curve(d3.curveMonotoneX)(data);
 
-  const handleMouseMove = (e) => {
-    const bisect = d3.bisector((d) => d.day).left;
-    const x0 = getX.invert(d3.pointer(e, this)[0]);
-    const index = bisect(data, x0, 1);
-    setActiveIndex(index);
-  };
-
-  const handleMouseLeave = () => {
-    setActiveIndex(null);
-  };
-
   return (
     <div className="wrapper">
       <svg
         viewBox={`0 0 ${width + margin.left + margin.right} 
                           ${height + margin.top + margin.bottom}`}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
       >
         <g className="axis" ref={getYAxis} />
         <g

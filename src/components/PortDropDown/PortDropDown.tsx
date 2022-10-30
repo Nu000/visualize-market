@@ -26,7 +26,7 @@ function PortDropDown({ name, ports, updatePorts }: IProps) {
   }, [selectedValue]);
 
   return (
-    <FormControl sx={{ width: '20%', m: 1 }}>
+    <FormControl sx={{ m: 1 }}>
       <InputLabel id={`${name}-label`}>{name === 'origin' ? 'Origin' : 'Destination'}</InputLabel>
       <Select
         labelId={`${name}-label`}
