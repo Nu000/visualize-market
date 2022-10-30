@@ -8,23 +8,19 @@ export const fetchPorts = createAsyncThunk<
 IPort[], void, { rejectValue:FetchError }>(
   'ports/fetch',
   async (_: void, thunkApi) => {
-    const response = await axios.get(CONSTANTS.PORTS_URL, {
-      headers: {
-        'x-api-key': CONSTANTS.API_KEY,
-      },
-    });
-    const { data } = response;
-    if (response.data?.error?.code === 500) {
+    try {
+      const response = await axios.get(CONSTANTS.PORTS_URL, {
+        headers: {
+          'x-api-key': CONSTANTS.API_KEY,
+        },
+      });
+      const { data } = response;
+      return data;
+    } catch (error) {
       return thunkApi.rejectWithValue({
-        message: 'Failed to load Ports.',
+        message: 'Rates Not Found',
       });
     }
-    if (response.status !== 200) {
-      return thunkApi.rejectWithValue({
-        message: 'Failed to load Ports.',
-      });
-    }
-    return data;
   },
 );
 

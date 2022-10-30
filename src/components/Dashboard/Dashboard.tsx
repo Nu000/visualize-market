@@ -11,10 +11,11 @@ import { useAppDispatch, useAppSelector } from '../../state/reduxHooks';
 import { fetchPorts, fetchRates } from '../../state/thunks';
 import PortDropDown from '../PortDropDown/PortDropDown';
 import {
-  getPorts, getPortsLoadingState, getRateError, getRates,
+  getPorts, getPortsLoadingState, getRateError, getRates, getRatesLoadingState,
 } from '../../state/selectors';
 import Chart from '../Chart/Chart';
 import { PortType } from '../../state/types';
+import MarketPosition from '../MarketPosition/MarketPosition';
 
 function Dashboard() {
   const dispatch = useAppDispatch();
@@ -22,6 +23,7 @@ function Dashboard() {
   const rates = useAppSelector(getRates);
   const rateError = useAppSelector(getRateError);
   const loadingPorts = useAppSelector(getPortsLoadingState);
+  const loadingRates = useAppSelector(getRatesLoadingState);
   const [selectedPorts, setSelectedPorts] = useState({ origin: 'CNSGH', dest: 'NLRTM' });
   const [marketPosition, setMarketPosition] = useState('mean');
 
@@ -42,79 +44,41 @@ function Dashboard() {
   };
 
   return (
-    <Grid
-      container
-      spacing={2}
-      alignItems="center"
-      justifyContent="center"
-      style={{ minHeight: '100vh', maxHeight: '100%' }}
-    >
-      <Grid item xs={10}>
-        <h1>Market Rates</h1>
-      </Grid>
-      { loadingPorts ? (
-        <Grid item xs={10}>
-          <CircularProgress />
-        </Grid>
-      ) : (
-        <>
+    loadingPorts ? (
+      <div style={{ display: 'flex', justifyContent: 'center', marginTop: '40px' }}>
+        <CircularProgress />
+      </div>
+    )
+      : (
+        <Grid
+          container
+          spacing={2}
+          alignItems="center"
+          justifyContent="center"
+          style={{ minHeight: '100vh', maxHeight: '100%' }}
+        >
+          <Grid item xs={10}>
+            <h2>Market Rates</h2>
+          </Grid>
           <Grid item xs={5}>
             <PortDropDown name="origin" ports={ports} updatePorts={updatePorts} />
             <PortDropDown name="dest" ports={ports} updatePorts={updatePorts} />
           </Grid>
           <Grid item xs={5}>
-            <FormGroup sx={{
-              marginLeft: '15%',
-              border: '1px solid lightgray',
-              paddingLeft: 1,
-              borderRadius: '5px',
-            }}
-            >
-              <FormLabel>Market Postion</FormLabel>
-              <div>
-                <FormControlLabel
-                  control={(
-                    <Checkbox
-                      id="high-checkbox"
-                      checked={marketPosition === 'high'}
-                      onChange={() => { setMarketPosition('high'); }}
-                    />
-            )}
-                  label="Market High"
-                />
-                <FormControlLabel
-                  control={(
-                    <Checkbox
-                      id="mean-checkbox"
-                      checked={marketPosition === 'mean'}
-                      onChange={() => { setMarketPosition('mean'); }}
-                    />
-        )}
-                  label="Market Average"
-                />
-                <FormControlLabel
-                  control={(
-                    <Checkbox
-                      id="low-checkbox"
-                      checked={marketPosition === 'low'}
-                      onChange={() => { setMarketPosition('low'); }}
-                    />
-)}
-                  label="Market Low"
-                />
-              </div>
-            </FormGroup>
+            <MarketPosition
+              marketPosition={marketPosition}
+              updateMarketPosition={setMarketPosition}
+            />
           </Grid>
           <Grid item xs={10}>
-            {rateError !== null ? <Alert severity="error">{rateError}</Alert>
+            {loadingRates ? <CircularProgress />
               : (
                 <Chart rates={rates} marketPosition={marketPosition} />
               )}
           </Grid>
-        </>
-      )}
 
-    </Grid>
+        </Grid>
+      )
   );
 }
 
