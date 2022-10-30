@@ -16,7 +16,7 @@ describe('PortDropDown Tests', () => {
     expect(element).toBeInTheDocument();
   });
   test('select default port', () => {
-    const element = screen.getByText('Shanghai(CNSGH)');
+    const element = screen.getByDisplayValue('Shanghai(CNSGH)');
     expect(element).toBeInTheDocument();
   });
 });

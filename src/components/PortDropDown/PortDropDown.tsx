@@ -22,7 +22,7 @@ function PortDropDown({ name, ports, updatePorts }: IProps) {
   });
 
   useEffect(() => {
-    updatePorts(name, selectedValue.code);
+    updatePorts(name, selectedValue?.code);
   }, [selectedValue]);
 
   return (
@@ -30,9 +30,11 @@ function PortDropDown({ name, ports, updatePorts }: IProps) {
       <Autocomplete
         disablePortal
         id={`${name}-select`}
+        data-testid={`${name}-select`}
         options={ports}
         sx={{ width: 250 }}
         value={selectedValue}
+        isOptionEqualToValue={(option, value) => option.code === value.code}
         getOptionLabel={(port) => `${port.name}(${port.code})`}
         renderOption={(props, port, state) => (
           <li {...props}>

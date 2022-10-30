@@ -62,18 +62,12 @@ function Chart({ rates, marketPosition } : IProps) {
     .y((d) => getY(d.marketPosition))
     .curve(d3.curveMonotoneX)(data);
 
-  const areaPath = d3
-    .area()
-    .x((d) => getX(d.day))
-    .y0((d) => getY(d.marketPosition))
-    .y1(() => getY(yMinValue - 1))
-    .curve(d3.curveMonotoneX)(data);
-
   return (
     <div className="wrapper">
       <svg
         viewBox={`0 0 ${width + margin.left + margin.right} 
                           ${height + margin.top + margin.bottom}`}
+        id="chart"
       >
         <g className="axis" ref={getYAxis} />
         <g
