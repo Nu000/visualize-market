@@ -1,6 +1,5 @@
 import React from 'react';
-import { screen, fireEvent } from '@testing-library/react';
-import { setupServer } from 'msw/node';
+import { screen } from '@testing-library/react';
 import { renderWithProviders } from '../../util/test-utils';
 import Dashboard from './Dashboard';
 

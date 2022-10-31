@@ -1,8 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useEffect, useState } from 'react';
-import {
-  Box, Container, FormLabel, Grid, CircularProgress,
-} from '@mui/material';
+import { Grid, CircularProgress } from '@mui/material';
 import Alert from '@mui/material/Alert';
 import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from '../../state/reduxHooks';
@@ -45,7 +43,7 @@ function Dashboard() {
   return (
     loadingPorts ? (
       <div style={{ display: 'flex', justifyContent: 'center', marginTop: '40px' }}>
-        <CircularProgress data-testid="circular-progress"/>
+        <CircularProgress data-testid="circular-progress" />
       </div>
     )
       : (

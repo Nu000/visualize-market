@@ -1,7 +1,5 @@
 import React from 'react';
-import { screen, fireEvent, render } from '@testing-library/react';
-import UserEvent from '@testing-library/user-event';
-import { setupServer } from 'msw/node';
+import { screen, fireEvent } from '@testing-library/react';
 import { renderWithProviders } from '../../util/test-utils';
 import MarketPosition from './MarketPosition';
 
