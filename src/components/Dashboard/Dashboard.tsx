@@ -45,7 +45,7 @@ function Dashboard() {
   return (
     loadingPorts ? (
       <div style={{ display: 'flex', justifyContent: 'center', marginTop: '40px' }}>
-        <CircularProgress />
+        <CircularProgress data-testid="circular-progress"/>
       </div>
     )
       : (

@@ -13,7 +13,7 @@ describe('App Tests', () => {
     );
   });
   test('renders App', () => {
-    const name = screen.getByText('Test App');
+    const name = screen.getByTestId('circular-progress');
     expect(name).toBeInTheDocument();
   });
 });

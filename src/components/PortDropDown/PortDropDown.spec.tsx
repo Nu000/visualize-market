@@ -12,7 +12,7 @@ describe('PortDropDown Tests', () => {
     );
   });
   test('renders DropDown', () => {
-    const element = screen.getByText('Origin');
+    const element = screen.getByTestId('origin-select');
     expect(element).toBeInTheDocument();
   });
   test('select default port', () => {

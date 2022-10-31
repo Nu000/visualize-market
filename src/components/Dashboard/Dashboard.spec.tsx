@@ -2,16 +2,16 @@ import React from 'react';
 import { screen, fireEvent } from '@testing-library/react';
 import { setupServer } from 'msw/node';
 import { renderWithProviders } from '../../util/test-utils';
-import Home from './Dashboard';
+import Dashboard from './Dashboard';
 
 describe('Dashboard Tests', () => {
   beforeEach(() => {
     renderWithProviders(
-      <Home />,
+      <Dashboard />,
     );
   });
-  test('renders Dashboard', () => {
-    const btn = screen.getByText('Market Price');
+  test('renders progress', () => {
+    const btn = screen.getByTestId('circular-progress');
     expect(btn).toBeInTheDocument();
   });
 });

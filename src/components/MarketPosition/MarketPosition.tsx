@@ -2,7 +2,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { FormLabel } from '@mui/material';
-import Alert from '@mui/material/Alert';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
@@ -30,6 +29,7 @@ function MarketPosition({ marketPosition, updateMarketPosition }: IProps) {
           control={(
             <Checkbox
               id="high-checkbox"
+              data-testid="high-checkbox"
               checked={marketPosition === 'high'}
               onChange={() => { updateMarketPosition('high'); }}
             />
@@ -40,6 +40,7 @@ function MarketPosition({ marketPosition, updateMarketPosition }: IProps) {
           control={(
             <Checkbox
               id="mean-checkbox"
+              data-testid="mean-checkbox"
               checked={marketPosition === 'mean'}
               onChange={() => { updateMarketPosition('mean'); }}
             />
@@ -50,6 +51,7 @@ function MarketPosition({ marketPosition, updateMarketPosition }: IProps) {
           control={(
             <Checkbox
               id="low-checkbox"
+              data-testid="low-checkbox"
               checked={marketPosition === 'low'}
               onChange={() => { updateMarketPosition('low'); }}
             />

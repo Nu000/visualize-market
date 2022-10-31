@@ -74,6 +74,7 @@ function Chart({ rates, marketPosition } : IProps) {
           viewBox={`0 0 ${width + margin.left + margin.right} 
                           ${height + margin.top + margin.bottom}`}
           id="chart"
+          data-testid="chart"
         >
           <g className="axis" ref={getYAxis} />
           <g
