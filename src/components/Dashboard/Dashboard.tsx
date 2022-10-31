@@ -49,25 +49,25 @@ function Dashboard() {
       : (
         <Grid
           container
-          spacing={2}
+          spacing={1}
           alignItems="center"
           justifyContent="center"
-          style={{ minHeight: '100vh', maxHeight: '100%' }}
+          style={{ minHeight: '100vh', maxHeight: '100%', marginTop: '-90px' }}
         >
-          <Grid item xs={10}>
+          <Grid item xs={12} lg={11}>
             <h2>{t('Market Rates')}</h2>
           </Grid>
-          <Grid item xs={5}>
+          <Grid item xs={12} lg={6}>
             <PortDropDown name="origin" ports={ports} updatePorts={updatePorts} />
             <PortDropDown name="dest" ports={ports} updatePorts={updatePorts} />
           </Grid>
-          <Grid item xs={5}>
+          <Grid item xs={12} lg={5}>
             <MarketPosition
               marketPosition={marketPosition}
               updateMarketPosition={setMarketPosition}
             />
           </Grid>
-          <Grid item xs={10}>
+          <Grid item xs={12} lg={11}>
             {rateError !== null && <Alert severity="error">{rateError}</Alert>}
 
             {loadingRates ? <div style={{ height: '600px' }}><CircularProgress /></div>
@@ -75,7 +75,6 @@ function Dashboard() {
                 <Chart rates={rates} marketPosition={marketPosition} />
               )}
           </Grid>
-
         </Grid>
       )
   );

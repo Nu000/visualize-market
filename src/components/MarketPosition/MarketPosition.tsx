@@ -17,7 +17,7 @@ function MarketPosition({ marketPosition, updateMarketPosition }: IProps) {
   return (
 
     <FormGroup sx={{
-      marginLeft: '15%',
+      // marginLeft: '15%',
       border: '1px solid lightgray',
       paddingLeft: 1,
       borderRadius: '5px',
