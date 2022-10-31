@@ -1,1 +1,9 @@
-{}
+{
+    "Market_Rates": "Market Rates",
+    "Origin": "Origin",
+    "Destination": "Destination",
+    "Market Postion": "Market Postion",
+    "Market High": "Market High",
+    "Market Average": "Market Average",
+    "Market Low": "Market Low"
+}

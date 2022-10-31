@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import FormControl from '@mui/material/FormControl';
@@ -13,6 +14,7 @@ interface IProps {
   }
 
 function PortDropDown({ name, ports, updatePorts }: IProps) {
+  const { t } = useTranslation();
   const [selectedValue, setSelectedValue] = useState(name === 'origin' ? {
     code: 'CNSGH',
     name: 'Shanghai',
@@ -42,7 +44,7 @@ function PortDropDown({ name, ports, updatePorts }: IProps) {
           </li>
         )}
         onChange={(e, value) => { setSelectedValue(value as IPort); }}
-        renderInput={(params) => <TextField {...params} label={name === 'origin' ? 'Origin' : 'Destination'} />}
+        renderInput={(params) => <TextField {...params} label={name === 'origin' ? t('Origin') : t('Destination')} />}
       />
     </FormControl>
   );

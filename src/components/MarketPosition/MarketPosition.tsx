@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { FormLabel } from '@mui/material';
 import Alert from '@mui/material/Alert';
 import FormGroup from '@mui/material/FormGroup';
@@ -12,6 +13,8 @@ interface IProps {
 }
 
 function MarketPosition({ marketPosition, updateMarketPosition }: IProps) {
+  const { t } = useTranslation();
+
   return (
 
     <FormGroup sx={{
@@ -21,7 +24,7 @@ function MarketPosition({ marketPosition, updateMarketPosition }: IProps) {
       borderRadius: '5px',
     }}
     >
-      <FormLabel>Market Postion</FormLabel>
+      <FormLabel>{t('Market Postion')}</FormLabel>
       <div>
         <FormControlLabel
           control={(
@@ -31,7 +34,7 @@ function MarketPosition({ marketPosition, updateMarketPosition }: IProps) {
               onChange={() => { updateMarketPosition('high'); }}
             />
             )}
-          label="Market High"
+          label={t('Market High')}
         />
         <FormControlLabel
           control={(
@@ -41,7 +44,7 @@ function MarketPosition({ marketPosition, updateMarketPosition }: IProps) {
               onChange={() => { updateMarketPosition('mean'); }}
             />
         )}
-          label="Market Average"
+          label={t('Market Average')}
         />
         <FormControlLabel
           control={(
@@ -51,7 +54,7 @@ function MarketPosition({ marketPosition, updateMarketPosition }: IProps) {
               onChange={() => { updateMarketPosition('low'); }}
             />
 )}
-          label="Market Low"
+          label={t('Market Low')}
         />
       </div>
     </FormGroup>

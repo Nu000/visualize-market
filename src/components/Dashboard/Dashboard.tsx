@@ -4,9 +4,7 @@ import {
   Box, Container, FormLabel, Grid, CircularProgress,
 } from '@mui/material';
 import Alert from '@mui/material/Alert';
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
+import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from '../../state/reduxHooks';
 import { fetchPorts, fetchRates } from '../../state/thunks';
 import PortDropDown from '../PortDropDown/PortDropDown';
@@ -18,6 +16,7 @@ import { PortType } from '../../state/types';
 import MarketPosition from '../MarketPosition/MarketPosition';
 
 function Dashboard() {
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const ports = useAppSelector(getPorts);
   const rates = useAppSelector(getRates);
@@ -58,7 +57,7 @@ function Dashboard() {
           style={{ minHeight: '100vh', maxHeight: '100%' }}
         >
           <Grid item xs={10}>
-            <h2>Market Rates</h2>
+            <h2>{t('Market Rates')}</h2>
           </Grid>
           <Grid item xs={5}>
             <PortDropDown name="origin" ports={ports} updatePorts={updatePorts} />
