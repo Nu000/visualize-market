@@ -13,52 +13,32 @@ interface IProps {
 
 function MarketPosition({ marketPosition, updateMarketPosition }: IProps) {
   const { t } = useTranslation();
-
+  const marketPositions = ['high', 'mean', 'low'];
   return (
-
     <FormGroup sx={{
-      // marginLeft: '15%',
       border: '1px solid lightgray',
       paddingLeft: 1,
       borderRadius: '5px',
     }}
     >
-      <FormLabel>{t('Market Postion')}</FormLabel>
-      <div>
-        <FormControlLabel
-          control={(
-            <Checkbox
-              id="high-checkbox"
-              data-testid="high-checkbox"
-              checked={marketPosition === 'high'}
-              onChange={() => { updateMarketPosition('high'); }}
-            />
+      <>
+        <FormLabel>{t('Market Postion')}</FormLabel>
+        <div>
+          {marketPositions.map((mp) => (
+            <FormControlLabel
+              control={(
+                <Checkbox
+                  id={`${mp}-checkbox`}
+                  data-testid={`${mp}-checkbox`}
+                  checked={marketPosition === mp}
+                  onChange={() => { updateMarketPosition(mp); }}
+                />
             )}
-          label={t('Market High')}
-        />
-        <FormControlLabel
-          control={(
-            <Checkbox
-              id="mean-checkbox"
-              data-testid="mean-checkbox"
-              checked={marketPosition === 'mean'}
-              onChange={() => { updateMarketPosition('mean'); }}
+              label={t(`Market ${mp}`)}
             />
-        )}
-          label={t('Market Average')}
-        />
-        <FormControlLabel
-          control={(
-            <Checkbox
-              id="low-checkbox"
-              data-testid="low-checkbox"
-              checked={marketPosition === 'low'}
-              onChange={() => { updateMarketPosition('low'); }}
-            />
-)}
-          label={t('Market Low')}
-        />
-      </div>
+          ))}
+        </div>
+      </>
     </FormGroup>
   );
 }

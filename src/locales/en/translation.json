@@ -3,7 +3,7 @@
     "Origin": "Origin",
     "Destination": "Destination",
     "Market Postion": "Market Postion",
-    "Market High": "Market High",
-    "Market Average": "Market Average",
-    "Market Low": "Market Low"
+    "Market high": "Market High",
+    "Market mean": "Market Average",
+    "Market low": "Market Low"
 }
