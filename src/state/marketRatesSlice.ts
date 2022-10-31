@@ -11,7 +11,6 @@ export const initialState: IRootState = {
   loadingRates: false,
   errorPorts: null,
   errorRates: null,
-
 };
 
 export const marketRatesSlice = createSlice({

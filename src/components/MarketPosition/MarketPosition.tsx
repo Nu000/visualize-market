@@ -5,6 +5,8 @@ import { FormLabel } from '@mui/material';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
+import { useAppDispatch, useAppSelector } from '../../state/reduxHooks';
+import { getRateError } from '../../state/selectors';
 
 interface IProps {
    marketPosition: string,
@@ -13,6 +15,7 @@ interface IProps {
 
 function MarketPosition({ marketPosition, updateMarketPosition }: IProps) {
   const { t } = useTranslation();
+  const rateError = useAppSelector(getRateError);
   const marketPositions = ['high', 'mean', 'low'];
   return (
     <FormGroup sx={{
@@ -32,6 +35,7 @@ function MarketPosition({ marketPosition, updateMarketPosition }: IProps) {
                   data-testid={`${mp}-checkbox`}
                   checked={marketPosition === mp}
                   onChange={() => { updateMarketPosition(mp); }}
+                  disabled={rateError !== null}
                 />
             )}
               label={t(`Market ${mp}`)}
