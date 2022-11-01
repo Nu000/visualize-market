@@ -7,7 +7,7 @@ import { rates } from '../../util/mock-data';
 describe('Chart Tests', () => {
   beforeEach(() => {
     renderWithProviders(
-      <Chart rates={rates} marketPosition='mean'/>,
+      <Chart rates={rates} marketPosition="mean" />,
     );
   });
   test('renders chart', () => {
