@@ -2,14 +2,19 @@
 import React, { useEffect, useState } from 'react';
 import * as d3 from 'd3';
 import { Alert } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 import { IRate } from '../../state/interfaces';
+import { useAppDispatch } from '../../state/reduxHooks';
 import './chart.css';
+import { setRateError } from '../../state/marketRatesSlice';
 
 interface IProps {
     rates: IRate[],
     marketPosition: string
 }
 function Chart({ rates, marketPosition } : IProps) {
+  const dispatch = useAppDispatch();
+  const { t } = useTranslation();
   const [activeIndex, setActiveIndex] = useState(null);
   let { innerWidth: width, innerHeight: height } = window;
   const [invalidData, setInvalidData] = React.useState(false);
@@ -23,13 +28,16 @@ function Chart({ rates, marketPosition } : IProps) {
   const color = 'slateblue';
 
   useEffect(() => {
-    const parseDate = d3.timeParse('%Y-%m-%d');
     const data = [];
     rates.forEach((element) => {
+      // set error when there are null values in response
       if (element.day === null || element.high === null
         || element.mean === null || element.low === null) {
         setInvalidData(true);
+        dispatch(setRateError(t('Invalid Data')));
       }
+      // prepare data to display in the chart
+      const parseDate = d3.timeParse('%Y-%m-%d');
       const datapoint = {
         day: parseDate(element.day),
         marketPosition: Number(element[marketPosition]),
@@ -69,7 +77,8 @@ function Chart({ rates, marketPosition } : IProps) {
 
   return (
     <div className="wrapper">
-      {invalidData ? <Alert severity="error">Invalid Data</Alert> : (
+      {!invalidData
+        && (
         <svg
           viewBox={`0 0 ${width + margin.left + margin.right} 
                           ${height + margin.top + margin.bottom}`}
@@ -106,7 +115,7 @@ function Chart({ rates, marketPosition } : IProps) {
             </g>
           ))}
         </svg>
-      )}
+        )}
     </div>
   );
 }

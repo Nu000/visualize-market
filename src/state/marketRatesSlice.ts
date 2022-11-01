@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IRootState } from './interfaces';
 import { fetchPorts, fetchRates } from './thunks';
 
@@ -17,7 +17,9 @@ export const marketRatesSlice = createSlice({
   name: 'marketRates',
   initialState,
   reducers: {
-
+    setRateError(state, action:PayloadAction<string>) {
+      state.errorRates = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchPorts.pending, (state) => {
@@ -47,6 +49,7 @@ export const marketRatesSlice = createSlice({
       (state, { payload }) => {
         state.rates = payload;
         state.loadingRates = false;
+        state.errorRates = null;
       },
     );
     builder.addCase(
@@ -60,8 +63,8 @@ export const marketRatesSlice = createSlice({
   },
 });
 
-// export const {
-
-// } = marketRatesSlice.actions;
+export const {
+  setRateError,
+} = marketRatesSlice.actions;
 
 export default marketRatesSlice.reducer;
