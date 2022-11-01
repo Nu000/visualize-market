@@ -1,4 +1,4 @@
-# Getting Started with React App
+# Getting Started
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 ## System Requirements
@@ -40,3 +40,20 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
+## UI Screens
+
+### Dashboard View
+
+![](src/assets/dashboard.png)
+
+### Error View
+
+![](src/assets/error.png)
+
+### Dropdown View
+
+![](src/assets/dropdown.png)
+
+### Search View
+
+![](src/assets/search.png)
