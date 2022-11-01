@@ -13,7 +13,6 @@ interface IProps {
 }
 function Chart({ rates, marketPosition } : IProps) {
   let { innerWidth: width, innerHeight: height } = window;
-  const [invalidData, setInvalidData] = React.useState(false);
   const data = useFormatter(rates, marketPosition);
   const rateError = useAppSelector(getRateError);
   const margin = {

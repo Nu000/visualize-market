@@ -29,7 +29,8 @@ function Dashboard() {
   }, []);
 
   useEffect(() => {
-    if (selectedPorts.origin && selectedPorts.dest) {
+    if (selectedPorts.origin && selectedPorts.dest
+      && (selectedPorts.origin !== selectedPorts.dest)) {
       dispatch(fetchRates(selectedPorts));
     }
   }, [selectedPorts]);

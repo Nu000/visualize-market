@@ -27,7 +27,9 @@ function PortDropDown({ name, ports, updatePorts }: IProps) {
   });
 
   useEffect(() => {
-    dispatch(clearRates());
+    if (selectedValue === null) { // clear rate array when clear button pressed in Dropdown
+      dispatch(clearRates());
+    }
     updatePorts(name, selectedValue?.code);
   }, [selectedValue]);
 
