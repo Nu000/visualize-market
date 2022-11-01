@@ -11,18 +11,19 @@ You need to install and run with yarn since this project uses Material UI with s
 ## Getting Started
 1. Open the terminal(Windows Command Prompt or PowerShell)
 2. Navigate to the project folder.
-3. Install yarn 
+3. Rename /src/sample-config.js to /src/config.js and replace the text `<api-key>` with your api key.
+4. Install yarn 
 ### `npm install --global yarn`
-4. Run the following command to install the required dependencies.
+5. Run the following command to install the required dependencies.
 ###  `yarn`
-5. Run the following command.
+6. Run the following command.
 ### `yarn start`
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
-5. Running tests.
+7. Running tests.
 ### `yarn test`
 
 aunches the test runner in the interactive watch mode.\
@@ -31,7 +32,7 @@ See the section about [running tests](https://facebook.github.io/create-react-ap
 
 Lauches cypress UI and you can run the integration tests.
 
-6. Production deployment
+8. Production deployment
 ### `yarn build`
 
 Builds the app for production to the `build` folder.\

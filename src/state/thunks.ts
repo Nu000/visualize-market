@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { API_KEY } from '../config';
 import { CONSTANTS } from '../constants/AppConstants';
 import { IPort, IRate } from './interfaces';
 import { FetchError } from './types';
@@ -11,7 +12,7 @@ IPort[], void, { rejectValue:FetchError }>(
     try {
       const response = await axios.get(CONSTANTS.PORTS_URL, {
         headers: {
-          'x-api-key': CONSTANTS.API_KEY,
+          'x-api-key': API_KEY,
         },
       });
       const { data } = response;
@@ -31,7 +32,7 @@ IRate[], {origin: string, dest: string}, { rejectValue:FetchError }>(
     try {
       const response = await axios.get(`${CONSTANTS.RATES_URL}?origin=${ports.origin}&destination=${ports.dest}`, {
         headers: {
-          'x-api-key': CONSTANTS.API_KEY,
+          'x-api-key': API_KEY,
         },
       });
       const { data } = response;
