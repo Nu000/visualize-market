@@ -5,7 +5,7 @@ function ErrorPage() {
   return (
     <div>
       <h1>Page Not Found!</h1>
-      <Link to="/">Home</Link>
+      <Link to="/">Dashboard</Link>
     </div>
   );
 }

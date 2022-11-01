@@ -1,23 +1,21 @@
 // @ts-nocheck
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import * as d3 from 'd3';
-import { Alert } from '@mui/material';
-import { useTranslation } from 'react-i18next';
 import { IRate } from '../../state/interfaces';
-import { useAppDispatch } from '../../state/reduxHooks';
+import { useAppSelector } from '../../state/reduxHooks';
 import './chart.css';
-import { setRateError } from '../../state/marketRatesSlice';
+import { getRateError } from '../../state/selectors';
+import useFormatter from '../../util/useFormatter';
 
 interface IProps {
     rates: IRate[],
     marketPosition: string
 }
 function Chart({ rates, marketPosition } : IProps) {
-  const dispatch = useAppDispatch();
-  const { t } = useTranslation();
   let { innerWidth: width, innerHeight: height } = window;
   const [invalidData, setInvalidData] = React.useState(false);
-  const [data, setData] = React.useState([]);
+  const data = useFormatter(rates, marketPosition);
+  const rateError = useAppSelector(getRateError);
   const margin = {
     top: 60, right: 10, bottom: 80, left: 10,
   };
@@ -26,25 +24,6 @@ function Chart({ rates, marketPosition } : IProps) {
 
   const color = 'SkyBlue';
 
-  useEffect(() => {
-    const data = [];
-    rates.forEach((element) => {
-      // set error when there are null values in response
-      if (element.day === null || element.high === null
-        || element.mean === null || element.low === null) {
-        setInvalidData(true);
-        dispatch(setRateError(t('Invalid Data')));
-      }
-      // prepare data to display in the chart
-      const parseDate = d3.timeParse('%Y-%m-%d');
-      const datapoint = {
-        day: parseDate(element.day),
-        marketPosition: Number(element[marketPosition]),
-      };
-      data.push(datapoint);
-    });
-    setData(data);
-  }, [rates, marketPosition]);
   const yMinValue = d3.min(data, (d) => d.marketPosition);
   const yMaxValue = d3.max(data, (d) => d.marketPosition);
 
@@ -76,7 +55,7 @@ function Chart({ rates, marketPosition } : IProps) {
 
   return (
     <div className="wrapper">
-      {!invalidData
+      {rateError === null
         && (
         <svg
           viewBox={`0 0 ${width + margin.left + margin.right} 

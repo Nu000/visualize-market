@@ -5,7 +5,7 @@ import { FormLabel } from '@mui/material';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import { useAppDispatch, useAppSelector } from '../../state/reduxHooks';
+import { useAppSelector } from '../../state/reduxHooks';
 import { getRateError } from '../../state/selectors';
 
 interface IProps {
@@ -29,6 +29,7 @@ function MarketPosition({ marketPosition, updateMarketPosition }: IProps) {
         <div>
           {marketPositions.map((mp) => (
             <FormControlLabel
+              key={mp}
               control={(
                 <Checkbox
                   id={`${mp}-checkbox`}
@@ -47,4 +48,4 @@ function MarketPosition({ marketPosition, updateMarketPosition }: IProps) {
   );
 }
 
-export default MarketPosition;
+export default React.memo(MarketPosition);

@@ -11,7 +11,7 @@ describe('Market Position Tests', () => {
     );
   });
   test('renders Market High', async () => {
-    const element = screen.getByText('Market High');
+    const element = screen.getByText('Market high');
     expect(element).toBeInTheDocument();
     const checkbox = screen.getByTestId('high-checkbox').querySelector('input[type="checkbox"]') as HTMLInputElement;
     expect(checkbox).not.toBeChecked();
@@ -22,7 +22,7 @@ describe('Market Position Tests', () => {
   });
 
   test('renders Market Average', () => {
-    const btn = screen.getByText('Market Average');
+    const btn = screen.getByText('Market mean');
     expect(btn).toBeInTheDocument();
     const checkbox = screen.getByTestId('mean-checkbox').querySelector('input[type="checkbox"]') as HTMLInputElement;
     expect(checkbox).toBeChecked();
@@ -33,7 +33,7 @@ describe('Market Position Tests', () => {
   });
 
   test('renders Market Low', () => {
-    const btn = screen.getByText('Market Low');
+    const btn = screen.getByText('Market low');
     expect(btn).toBeInTheDocument();
     const checkbox = screen.getByTestId('low-checkbox').querySelector('input[type="checkbox"]') as HTMLInputElement;
     expect(checkbox).not.toBeChecked();
