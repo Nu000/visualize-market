@@ -20,6 +20,9 @@ export const marketRatesSlice = createSlice({
     setRateError(state, action:PayloadAction<string>) {
       state.errorRates = action.payload;
     },
+    clearRates(state) {
+      state.rates = [];
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchPorts.pending, (state) => {
@@ -65,6 +68,7 @@ export const marketRatesSlice = createSlice({
 
 export const {
   setRateError,
+  clearRates,
 } = marketRatesSlice.actions;
 
 export default marketRatesSlice.reducer;

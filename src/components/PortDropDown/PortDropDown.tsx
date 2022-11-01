@@ -1,11 +1,13 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import FormControl from '@mui/material/FormControl';
+import { useAppDispatch } from '../../state/reduxHooks';
 import { IPort } from '../../state/interfaces';
 import { PortType } from '../../state/types';
+import { clearRates } from '../../state/marketRatesSlice';
 
 interface IProps {
   name: PortType,
@@ -15,6 +17,7 @@ interface IProps {
 
 function PortDropDown({ name, ports, updatePorts }: IProps) {
   const { t } = useTranslation();
+  const dispatch = useAppDispatch();
   const [selectedValue, setSelectedValue] = useState(name === 'origin' ? {
     code: 'CNSGH',
     name: 'Shanghai',
@@ -24,6 +27,7 @@ function PortDropDown({ name, ports, updatePorts }: IProps) {
   });
 
   useEffect(() => {
+    dispatch(clearRates());
     updatePorts(name, selectedValue?.code);
   }, [selectedValue]);
 
@@ -50,4 +54,4 @@ function PortDropDown({ name, ports, updatePorts }: IProps) {
   );
 }
 
-export default PortDropDown;
+export default React.memo(PortDropDown);
